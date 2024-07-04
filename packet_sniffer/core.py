@@ -5,7 +5,7 @@ __author__ = "EONRaider @ keybase.io/eonraider"
 
 import itertools
 import time
-from socket import AF_INET, SOCK_RAW, ntohs, socket
+from socket import AF_PACKET, SOCK_RAW, ntohs, socket
 from typing import Iterator
 
 import netprotocols
@@ -61,7 +61,7 @@ class Decoder:
         self.data = frame[end:]
 
     def execute(self) -> Iterator:
-        with socket(AF_INET, SOCK_RAW, ntohs(0x0003)) as sock:
+        with socket(AF_PACKET, SOCK_RAW, ntohs(0x0003)) as sock:
             self._bind_interface(sock)
             for self.packet_num in itertools.count(1):
                 self.frame_length = len(frame := sock.recv(9000))
