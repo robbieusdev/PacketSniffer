@@ -1,0 +1,2 @@
+altgraph==0.17.2
+netprotocols==0.5.0
